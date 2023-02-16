@@ -42,7 +42,7 @@ class UsuariosController extends Controller
         $retorno = array('Error'    => array(),
                          'Success'  => array());
 
-        # Validar que las contraseñas sean las mimsas
+        # Validar que las contraseñas sean las mismas
         if( $request['password'] != $request['password_confirmation'])
             $retorno['Error'][] = "La contraseña y la confirmacion de contraseña no son iguales.";
 

@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Area;
 use App\Models\complementos_switch;
 use App\Models\Equipo;
+use App\Models\PrestamoEquipo;
 use App\Models\Empleado;
 use App\Models\VsEquipo;
 use App\Models\VsPrestamo;
@@ -339,7 +340,20 @@ public function busquedaEquiposPrestamo(Request $request){
                 ->orWhere('tipo_conexion','LIKE','%'.$busqueda.'%')
                 ->orWhere('tipo_equipo','LIKE','%'.$busqueda.'%')
                 ->orWhere('area','LIKE','%'.$busqueda.'%')->get();
-            $equipoPorPrestamo = EquipoPorPrestamo::where('id_prestamo','=', $prestamo_id)->get();
+
+                $equipoPorPrestamo = EquipoPorPrestamo::where('id_prestamo','=', $prestamo_id)->get();
+                    foreach ($equipos as $equipo) {
+                        $id_equipo = $equipo->id;  
+                            if($consult = MovimientoEquipo::where('id_equipo' ,'=' ,$equipo->id)->limit(1)->latest()->first()){
+                               // dd($consult, $consult->registro);
+                                if($consult->registro == 'En préstamo'){
+                                    $consulta = VsPrestamo::where('estado','=','En préstamo')->where('lista_equipos','LIKE',' Id SIGE: %'.$id_equipo.'%')->orderBy('id', 'desc')->limit(1)->first();
+                                    $equipo->prestamo = $consulta; 
+                                    }
+                            }
+                        }
+
+
             return view('prestamo.agregarEquiposPrestamo')->with('equipos',$equipos)->with('busqueda', $busqueda)
                 ->with('prestamo', $prestamo )->with('prestamo_id', $prestamo_id)->with('equipoPorPrestamo', $equipoPorPrestamo);
         }else{
@@ -477,7 +491,7 @@ public function busquedaEquiposPrestamo(Request $request){
             $log = new Log();
         $log->tabla = "Equipos";
         $mov="";
-        $mov=$mov."Eliminaci�n l�gica del Equipo: ".$equipo_id;
+        $mov=$mov."Eliminaci n l gica del Equipo: ".$equipo_id;
         $log->movimiento = $mov;
         $log->usuario_id = Auth::user()->id;
         $log->acciones = "Borrrado";

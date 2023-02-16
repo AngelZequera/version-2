@@ -66,4 +66,6 @@ class User extends Authenticatable
     {
         $this->notify(new UserResetPassword($token));
     }
+
+    protected $table = 'users';
 }

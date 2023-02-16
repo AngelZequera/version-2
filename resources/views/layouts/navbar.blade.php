@@ -1,3 +1,14 @@
+<link rel="stylesheet" href="{{ asset('css/sb-admin-2.css') }}">
+<link href="vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
+
+<script src="{{ asset('js/sb-admin-2.js') }}"></script>
+<script src="{{ asset('js/Chart.js') }}"></script>
+
+<script src="vendor/jquery/jquery.min.js"></script>
+<script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+
+<script src="vendor/jquery-easing/jquery.easing.min.js"></script>
+  
 <nav>
     <div class="navbar">
         <i class='bx bx-menu'></i>
@@ -136,7 +147,7 @@
 
 
 
-            <li>
+        <li>
             @guest
             @if (Route::currentRouteName() == 'register')
             <li><a href="href={{ route('login') }}">{{ __('Acceder') }}</a></li>
@@ -159,13 +170,95 @@
                     @csrf
                 </form>
             </li>
+
+        {{-- <li style="
+            position: fixed;
+            right: 70px;
+            top: -5px;
+            " class="nav-item dropdown no-arrow mx-1">
+                <a class="nav-link dropdown-toggle" href="#" id="alertsDropdown" role="button"
+                    data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    <i class="fas fa-bell fa-fw"></i>
+                    <!-- Counter - Alerts --> 
+                    <span class="badge badge-danger badge-counter">5 +</span>{{-- {{$notificacion}} + 
+                </a> 
+                <!-- Dropdown - Alerts -->
+                <div class="dropdown-list dropdown-menu dropdown-menu-right shadow animated--grow-in"
+                    aria-labelledby="alertsDropdown">
+                    <h6 class="dropdown-header">
+                        Préstamos fuera de tiempo
+                    </h6>
+                    <a class="dropdown-item d-flex align-items-center" href="#">
+                        <div class="mr-3">
+                            <div class="icon-circle bg-primary">
+                                <i class="fas fa-user"></i>
+                             </div>
+                        </div>
+                        <div>
+                            <div class="small text-gray-500">December 12, 2019</div>
+                            <span class="font-weight-bold">A new monthly report is ready to download!</span>
+                        </div>
+                    </a>
+                    <a class="dropdown-item text-center small text-gray-500" href="#">Show All Alerts</a>
+                </div>
+            </li>--}}
             @endauth
-            </li>
-        </div>
-
-        <div class="nav-links">
+        </li> 
 
         </div>
+
+        {{-- <p><a onclick="UsuariosPendientes({{ collect() }})" data-bs-toggle="modal" data-bs-target="#exampleModal_pendientes" style="color: rgb(7,189,212)"><span class="design"></span></a></p>                 
+           --}}  
+            
+            
+
+ {{--        <div onclick="usuarioPendientes()" class="nav-links"> --}}
+            
+    </div>
 
     </div>
 </nav><br><br><br><br>
+
+{{-- <style>
+    .design  {
+    background:url( 'images/usuarios_pendientes.png') no-repeat 50% 50%;
+    background-size: 28px 28px;
+    display: inline-block;
+    height: 28px;
+    width: 50px;
+}
+</style> --}}
+
+{{-- <script>
+      public function Notificacion_prestamos($vsprestamos){
+        $count = 0; 
+            foreach($vsprestamos as $key => $value){
+
+                $fechaInicio = $value->fecha_inicio;
+                $fechaActualizacion = $value->fecha_actualizacion;
+                $fechaActualizacion2 = \Carbon\Carbon::parse($fechaActualizacion)->format('Y/m/d');
+
+               $fechaActual_prestamo = Carbon::now()->parse()->format('Y/m/d');
+               
+                    if($fechaInicio == $fechaActualizacion2 ){
+                        $fechaProxima = \Carbon\Carbon::parse($fechaInicio)->addMonths(5)->format('Y/m/d');
+                    }else{
+                        if($fechaActualizacion2 > $fechaInicio){
+                            $fechaProxima = \Carbon\Carbon::parse($fechaActualizacion2)->addMonths(5)->format('Y/m/d');
+                        }
+                    }
+
+                    if( $fechaActual_prestamo > $fechaProxima){
+                       $count++;
+                    }
+                    
+                } 
+
+                //dd($prestamosEquipos_array);
+                return $count;
+    }
+</script> --}}
+
+
+{{-- @include('layouts.modal') --}}
+

@@ -48,6 +48,20 @@ return [
             'visibility' => 'public',
         ],
 
+        'contratos' => [
+            'driver' => 'local',
+            'root' => storage_path('app/documentos/contratos'),
+            'url' => env('APP_URL').'/storage',
+            'visibility' => 'public',
+        ],
+
+        'prestamos' => [
+            'driver' => 'local',
+            'root' => storage_path('app/documentos/prestamos'),
+            'url' => env('APP_URL').'/storage',
+            'visibility' => 'public',
+        ],
+
         'images' => [
             'driver' => 'local',
             'root' => storage_path('app/images'),

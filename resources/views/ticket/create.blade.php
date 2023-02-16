@@ -82,7 +82,6 @@
                                     <option value="Incidente" selected>Incidente</option>
                                     <option value="Solicitudes de Servicio">Solicitudes de Servicio</option>
                                     <option value="Reporte de aula">Reporte de aula</option>
-
                                 </select>
                             </div>
                         </div>

@@ -59,6 +59,8 @@ Route::resource("llaves", "App\Http\Controllers\LlavesController");
 Route::resource("personal", "App\Http\Controllers\PersonalController");
 Route::resource("bajas", "App\Http\Controllers\BajaController");
 
+Route::resource("contrato", "App\Http\Controllers\FormatoContrato");
+
 Route::resource("expedientes", "App\Http\Controllers\ExpedienteController");
 /*Route::resource(
     "mantenimientoEquipos",
@@ -72,6 +74,25 @@ Route::post("personal_search", [
     "middleware" => "auth",
     "uses" => "App\Http\Controllers\PersonalController@search",
 ])->name("personal.search");
+
+Route::get("/imprimirContrato/{prestamo_id}", [
+    "as" => "imprimirContrato",
+    "middleware" => "auth",
+    "uses" => "App\Http\Controllers\FormatoContrato@imprimirContrato",
+]);
+
+Route::post("/BuscadorEquipos/{id}", [
+    "as" => "BuscadorEquipos",
+    "middleware" => "auth",
+    "uses" => "App\Http\Controllers\PrestamoController@BuscadorEquipos",
+]);
+
+Route::post("/Fechas_diagrama/{id}", [
+    "as" => "Fechas_diagrama",
+    "middleware" => "auth",
+    "uses" => "App\Http\Controllers\PrestamoController@Fechas_diagrama",
+]);
+
 
 Route::get("/personal_export-pdf", [
     // 'as' => 'personal_search',
@@ -186,6 +207,22 @@ Route::post("/guardar-nuevo-prestamo", [
     "middleware" => "auth",
     "uses" => "App\Http\Controllers\PrestamoController@guardarPrestamo",
 ]);
+
+Route::get("/fechas_prestamos", [
+    "as" => "fechas_prestamos",
+    "middleware" => "auth",
+    "uses" => "App\Http\Controllers\PrestamoController@fechas_prestamos",
+]);
+
+
+
+Route::get("/agregarEquipos_prestamoExistente/{id}", [
+    "as" => "agregarEquipos_prestamoExistente",
+    "middleware" => "auth",
+    "uses" => "App\Http\Controllers\PrestamoController@agregarEquipos_prestamoExistente",
+]);
+
+
 Route::get("/quitar-equipo-prestado/{equipo_prestado}/{prestamo_id}", [
     "as" => "quitar-equipo-prestado",
     "middleware" => "auth",
@@ -215,6 +252,14 @@ Route::get("/devolverPrestamo/{prestamo_id}", [
     "middleware" => "auth",
     "uses" => "App\Http\Controllers\PrestamoController@devolver_prestamo",
 ]);
+
+Route::get("/reenovarPrestamo/{prestamo_id}", [
+    "as" => "reenovarPrestamo",
+    "middleware" => "auth",
+    "uses" => "App\Http\Controllers\PrestamoController@reenovar_prestamo",
+]);
+
+
 //////////
 
 Route::get("/revisionTickets", [
@@ -244,6 +289,12 @@ Route::get("/registrarEquipoPrestamo/{equipo_id}/{prestamo_id}", [
     "uses" => "App\Http\Controllers\PrestamoController@registrarEquipoPrestamo",
 ]);
 
+Route::get("/EquipoPrestado/{equipo_id}", [
+    "as" => "EquipoPrestado",
+    "middleware" => "auth",
+    "uses" => "App\Http\Controllers\PrestamoController@EquipoPrestado",
+]);
+
 Route::get("/eliminarEquipoTicket/{equipo_id}/{ticket_id}", [
     "as" => "eliminarEquipoTicket",
     "middleware" => "auth",
@@ -253,6 +304,12 @@ Route::get("/eliminarEquipoPrestamo/{item_id}", [
     "as" => "eliminarEquipoPrestamo",
     "middleware" => "auth",
     "uses" => "App\Http\Controllers\PrestamoController@eliminarEquipoPrestamo",
+]);
+
+Route::get("/registrarEquipoPrestamo/{equipo_id}", [
+    "as" => "equipoEnPrestamo",
+    "middleware" => "auth",
+    "uses" => "App\Http\Controllers\PrestamoController@equipoEnPrestamo",
 ]);
 
 Route::get("/imprimirRecibo/{ticket_id}", [

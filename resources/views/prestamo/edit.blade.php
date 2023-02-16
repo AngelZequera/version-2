@@ -68,11 +68,30 @@
                                 <label for="solicitante">Solicitante</label>
                                 <input type="text" class="form-control" id="solicitante" name="solicitante" value="{{$prestamo->solicitante}}" >
                             </div>
-                            <div class="col-md-6">
+
+
+                        {{--     <div class="col-md-6">
                                 <label for="cargo">Cargo</label>
                                 <input type="text" class="form-control" id="cargo" name="cargo" value="{{$prestamo->cargo}}" >
-                            </div>
+                            </div> --}}
 
+                            <div class="col-md-4">
+                                <label for="cargo">Cargo</label>
+                                      <select class="form-control"  id="cargo" name="cargo" onchange="Cargos()" required>
+                                        <option selected disabled>{{$prestamo->cargo}}</option>
+                                        <option disabled >Elegir</option>
+                                        <option value="Alumno" >Alumno</option>
+                                        <option value="Administrativo">Administrativo</option>
+                                        <option value="Academico">Académico</option>
+                                        <option value="Otro">Otro</option>
+                                      </select>
+                                    </div>         
+                
+                            <div id="otro" class="col-md-6" style="margin-top: 1%">
+                                <label id="label_cargo" style="display: none">Escribe tu cargo:</label>
+                                <input id="otro_cargo"  type="text" class="form-control"  name="no_seleccionado_input" style="display: none">
+                            </div>
+                    
 
                         </div>
                         <br>
@@ -134,6 +153,7 @@
                                 </div>
                                     <hr>
                                 @endforeach
+                                
 
 
 
@@ -154,15 +174,28 @@
 
 
                     </div>
-                    <br>
-                    <div class="row g-3 align-items-center">
-                        <div class="col-md-6">
-                            <a href="{{ route('home') }}" class="btn btn-danger">Cancelar</a>
-                            <button type="submit" class="btn btn-success">Guardar datos</button>
-                        </div>
-                    </div>
+                    <br>                    
                 </div>
-            </form>
+            <br>
+            <div class="row g-3 align-items-center">
+                <div class="col-md-6"> 
+                <!-- <a href="{{ route('home') }}" class="btn btn-primary">< Regresar</a> -->
+
+                <a href="{{ route('home') }}" class="btn btn-danger">Cancelar</a>
+                <button type="submit" class="btn btn-success">Guardar datos</button>
+            </div>
+            <div class="col-md-6" align="right"> 
+                @if($prestamo->cargo == 'Alumno')
+                <td><a class="btn btn-success" style="width: auto" href="{{ route('imprimirPrestamo', $prestamo->id)}}" target="blank">Imprimir formato de contrato</a></td>
+                 @endif    
+               
+            <p><a href="{{route('agregarEquipos_prestamoExistente', [$prestamo->id])}}" class="btn btn-info">Agregar más equipos</a></p>
+        </div>
+        </div>
+
+        
+                               
+    </form>
             <br>
             <div class="row g-3 align-items-center">
 
@@ -172,6 +205,7 @@
 
             </div>
     </div>
+    
 
     @else
         El periodo de Registro de Proyectos a terminado
@@ -179,3 +213,40 @@
 
 
 @endsection
+
+
+<script>
+    function Cargos(){
+  var getSelectValue = document.getElementById("cargo").value;
+  
+  switch (getSelectValue) {
+    case "Alumno": 
+      document.getElementById("otro_cargo").style.display = "none";
+      document.getElementById("label_cargo").style.display = "none";
+      document.getElementById('otro_cargo').name = 'no_seleccionado_input';
+      document.getElementById('cargo').name = 'cargo';
+      break;
+      
+    case "Administrativo":
+      document.getElementById("otro_cargo").style.display = "none";
+      document.getElementById("label_cargo").style.display = "none";
+      document.getElementById('otro_cargo').name= 'no_seleccionado_input';
+      document.getElementById('cargo').name = 'cargo';
+      break;
+
+      case "Academico":
+      document.getElementById("otro_cargo").style.display = "none";
+      document.getElementById("label_cargo").style.display = "none";
+      document.getElementById('otro_cargo').name = 'no_seleccionado_input';
+      document.getElementById('cargo').name = 'cargo';
+      break;
+
+    case "Otro":
+      document.getElementById("otro_cargo").style.display = "inline-block";
+      document.getElementById("label_cargo").style.display = "inline-block";
+      document.getElementById('cargo').name = 'no_seleccionado_select';
+      document.getElementById('otro_cargo').name = 'cargo';
+      break;
+  }
+}
+</script>
