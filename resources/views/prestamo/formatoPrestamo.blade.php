@@ -24,6 +24,16 @@
         td {
             font-size: 12px;
         }
+
+        footer {
+            position: absolute;
+            bottom: 0cm;
+            left: 0cm;
+            right: 0cm;
+            height: 2cm;
+            top: 97%;
+                 
+        }
     </style>
 </head>
 
@@ -128,17 +138,16 @@
                 </table>
             </div>
         </div>
-        <div class="row">
-            <div class="col-md-12 col-xs-12">
-                <br>
-                <br>
-                <br>
-                <br><br>
-                <p class="pie">Hora y día de Impresión: {{ date('d-m-Y H:i:s') }}<br>
-                    Realizado por: {{ Auth::user()->name }}<br>
-                    Formato CTA-010. Actualización: 28/abril/2021</p>
-            </div>
+
+<footer>
+    <div class="row">
+        <div class="col-md-12 col-xs-12"> 
+             <p class="pie">Hora y día de Impresión: {{ date('d-m-Y H:i:s') }}<br>
+                Realizado por: {{ Auth::user()->name }}<br>
+                Formato CTA-010. Actualización: 28/abril/2021</p>
         </div>
+    </div>
+</footer>
     </div>
 </body>
 

@@ -186,7 +186,7 @@
             </div>
             <div class="col-md-6" align="right"> 
                 @if($prestamo->cargo == 'Alumno')
-                <td><a class="btn btn-success" style="width: auto" href="{{ route('imprimirPrestamo', $prestamo->id)}}" target="blank">Imprimir formato de contrato</a></td>
+                <td><a class="btn btn-success" style="width: auto" href="{{ route('imprimirPrestamo', $prestamo->id)}}" target="blank">Imprimir formato de préstamo</a></td>
                  @endif    
                
             <p><a href="{{route('agregarEquipos_prestamoExistente', [$prestamo->id])}}" class="btn btn-info">Agregar más equipos</a></p>

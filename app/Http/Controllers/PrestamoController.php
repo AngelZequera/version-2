@@ -583,6 +583,11 @@ class PrestamoController extends Controller
            $movEquipos="";
                 foreach ($consulta as $resultado) {
                       
+/* 
+                    $ultimaArea = MovimientoEquipo::where('id_equipo','=',$id_Equipo)->whereIn('registro',['Cambio de ubicación', 'Registro Inicial en la Base de Datos', 'Traslado', 'Asignación Equipo', 'Alta de equipo', 'Asignación'])->orderBy('id', 'desc')->limit(1)->first();
+                    
+                    $area = $ultimaArea->id_area; */
+
                     $id_Equipo = $resultado->id_equipo;
  
                     $area_anterior1 = MovimientoEquipo::where('id_equipo','=',$id_Equipo)->where('registro','=','Cambio de ubicación')->orderBy('id', 'desc')->limit(1)->latest()->first();

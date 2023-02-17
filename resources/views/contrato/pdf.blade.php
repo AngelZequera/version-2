@@ -129,7 +129,7 @@
                           
                           
                             <tr>               
-                                <td colspan="7"><b>Observaciones:</b>{{ $prestamo->observaciones }}</td>
+                                <td colspan="7"><b>Observaciones: </b>{{ $prestamo->observaciones }}</td>
                             </tr>
                             <tr>               
                                 <td colspan="7"><b>Cantidad de dispositivos:</b> {{$contador_consulta}} </td>
@@ -263,7 +263,7 @@
         <div class="col-lg-2">
             <div class="border-left border-primary pt-2 pl-4 ml-2">
                 
-                       <p class="letter_size_2"><span class="font-weight-bold letter_size_2">8 -</span> En caso de daño, robo o extravío del equipo de cómputo o de cualquiera de sus accesorios, el Alumno deberá acudir en TIEMPO y FORMA a las instalaciones de la Coordinación de Tecnologías para el Aprendizaje (CTA) para que se le pueda dar el seguimiento adecuado al suceso, y así el alumno no se vea en la obligación de tener que resarcir el daño, ni tener que reponer el equipo.</p>
+                       <p class="letter_size_2"><span class="font-weight-bold letter_size_2">8 -</span> En caso de daño, robo o extravío del equipo de cómputo o de cualquiera de sus accesorios, el Alumno deberá acudir en TIEMPO y FORMA a las instalaciones de la Coordinación de Tecnologías para el Aprendizaje (CTA) para que se le pueda dar el seguimiento adecuado al suceso.</p>
 
                         <p class="letter_size_2"> <span class="font-weight-bold letter_size_2">9 -</span> El usuario deberá estar de acuerdo con el presente reglamento y firmar aceptando todos los términos y condiciones estipulados en el mismo. Bajo ninguna circunstancia el usuario podrá deslindarse de la responsabilidad que le confiere el presente reglamento y el formato de préstamo.</p>
    
@@ -286,7 +286,7 @@
                                     <tr>
                                         <th scope="col" colspan="10">
                                             <center>                
-                                                <h5 class="position-relative text-uppercase text-primary" style="font-size: 100%">Nota: Firmar alcalce y al final de la hoja.</h5>
+                                                <h5 class="position-relative text-uppercase text-primary" style="font-size: 100%">Nota: Firmar al calce y al final de la hoja.</h5>
                                             </center>
                                         </th>
                                     </tr>
