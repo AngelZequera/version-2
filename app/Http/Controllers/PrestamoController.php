@@ -31,12 +31,51 @@ class PrestamoController extends Controller
         $vsprestamos = VsPrestamo::where('activo','=',1)
             ->where('estado','En préstamo')->get();
 
+        $consultaAlumnos = VsPrestamo::where('activo','=',1)
+        ->where('estado','En préstamo')->where('cargo','Alumno')->get();
+
+        $consultaAdministracion = VsPrestamo::where('activo','=',1)
+        ->where('estado','En préstamo')->where('cargo','Administrativo')->get();
+
           $prestamos = $this->cargarDT($vsprestamos);
 
         //dd($prestamos);
         return view('prestamo.index')->with('prestamos',$prestamos);
     
     }
+
+    public function reporte($consulta){ 
+        $prestamos = [];
+        foreach ($consulta as $key => $value){
+        $prestamos[$key] = array(
+            $value['id'],
+            $value['solicitante'],
+            $value['carrera'],
+            $value['lugar'],
+            $value['contacto'],
+            $value['fecha_actualizacion'] = \Carbon\Carbon::parse($value->fecha_actualizacion)->format('d/m/Y H:i'),
+            $value['observaciones']
+        );
+
+        }   
+        return $prestamos ;
+     }
+
+
+     public function ReporteAdministracion(){
+        $consultaAlumnos =  VsPrestamo::where('activo','=',1)
+        ->where('estado','En préstamo')->where('cargo','Administrativo')->get();
+        $reporte = $this->reporte($consultaAlumnos);
+        return view('prestamo.reportes', compact('reporte'));
+    }
+
+    public function ReporteAlumno(){
+        $consultaAlumnos =  VsPrestamo::where('activo','=',1)
+        ->where('estado','En préstamo')->where('cargo','Alumno')->get();
+        $reporte = $this->reporte($consultaAlumnos);
+        return view('prestamo.reportes', compact('reporte'));
+    }
+
 //-------------------------------------
     public function VerEquipos($consulta){
 
@@ -221,6 +260,9 @@ class PrestamoController extends Controller
         }
     }
 
+
+
+
     public function cargarDT($consulta)
     {
         $prestamos = [];
@@ -233,7 +275,7 @@ class PrestamoController extends Controller
 	    $prestamo = route('imprimirPrestamo', $value['id']);
         $prestamo_contrato = route('imprimirContrato', $value['id']);
         $borrarPrestamo = route('borrarPrestamo', $value['id']);
-        $devolverPrestamo = route('devolverPrestamo', $value['id']);
+        $devolverPrestamo = route('devolverPrestamo', $value['id']); 
 
         $acciones = '';
 
@@ -379,6 +421,7 @@ class PrestamoController extends Controller
         $prestamo->solicitante = $request->input('solicitante');
         $prestamo->correo = $request->input('correo');
         $prestamo->cargo = $request->input('cargo');
+        $prestamo->carrera = $request->input('carrera');
         $prestamo->estado = $request->input('estado');
         $prestamo->fecha_inicio = $request->input('fecha_inicio');
         $prestamo->observaciones = $request->input('observaciones');
@@ -396,7 +439,7 @@ class PrestamoController extends Controller
         $log = new Log();
         $log->tabla = "Prestamo_y_PrestamoEquipo";
         $mov="";
-        $mov=$mov." id_area:".$prestamo->id_area ." telefono:". $prestamo->telefono ." solicitante" .$prestamo->solicitante;
+        $mov=$mov." id_area:".$prestamo->id_area ." telefono:". $prestamo->telefono ." solicitante" .$prestamo->solicitante." carrera:".$prestamo->carrera;
         $mov=$mov." correo:".$prestamo->correo ." cargo:". $prestamo->cargo ." estado:". $prestamo->estado ;
         $mov=$mov." fecha_inicio:".$prestamo->fecha_inicio ." observaciones:". $prestamo->observaciones;
         $mov=$mov." id_prestamo:".$prestamo_equipo->id_prestamo ." id_equipo:". $prestamo_equipo->id_equipo." accesorios:". $prestamo_equipo->accesorios .".";
@@ -478,18 +521,6 @@ class PrestamoController extends Controller
                 $prestamo->documento = $documento_path;
             }
     }
-
-      /*   if($documento){
-            $documento_path = date('w')."_".$prestamo_id.$documento->getClientOriginalName();
-            \Storage::disk('contratos')->put($documento_path, \File::get($documento));
-            $prestamo->documento = $documento_path;
-        }else{
-            $documento_path = date('w')."_".$prestamo_id.$documento->getClientOriginalName();
-            \Storage::disk('prestamos')->put($documento_path, \File::get($documento));
-            $prestamo->documento = $documento_path;
-        }
- */
-
         $prestamo->update();
 	//
         $log = new Log();
@@ -878,6 +909,13 @@ class PrestamoController extends Controller
         $prestamo->solicitante = $request->input('solicitante');
         $prestamo->correo = $request->input('correo');
         $prestamo->cargo = $request->input('cargo');
+
+        if($request->input('carrera') == null){
+            $prestamo->carrera = "-";
+        }else{
+            $prestamo->carrera = $request->input('carrera');
+        }
+
         $prestamo->estado = $request->input('estado');
         $prestamo->fecha_inicio = $request->input('fecha_inicio');
         $prestamo->observaciones = $request->input('observaciones');

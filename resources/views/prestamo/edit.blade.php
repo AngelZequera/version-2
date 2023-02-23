@@ -189,7 +189,8 @@
                 <td><a class="btn btn-success" style="width: auto" href="{{ route('imprimirPrestamo', $prestamo->id)}}" target="blank">Imprimir formato de préstamo</a></td>
                  @endif    
                
-            <p><a href="{{route('agregarEquipos_prestamoExistente', [$prestamo->id])}}" class="btn btn-info">Agregar más equipos</a></p>
+          
+            <p><a href="{{route('agregarEquipos_prestamoExistente', [$prestamo->id])}}" class="btn btn-outline-info">Agregar más equipos</a></p>
         </div>
         </div>
 

@@ -60,6 +60,7 @@
                                 <input type="text" class="form-control" id="solicitante" name="solicitante" value="{{old('solicitante')}}" required>
                             </div>
 
+                  
        
                             <div class="col-md-4">
                                 <label for="cargo">Cargo</label>
@@ -72,13 +73,18 @@
                                       </select>
                                     </div>
 
-                                    
+                            
                 
-                            <div id="otro" class="col-md-6" style="margin-top: 1%">
+                            <div id="otro" class="col-md-6" style="margin-top: 1%" >
                                 <label id="label_cargo" style="display: none">Escribe tu cargo:</label>
                                 <input id="otro_cargo"  type="text" class="form-control"  name="no_seleccionado_input" value="{{old('cargo')}}" style="display: none">
                             </div>
                     
+                            <div class="col-md-6"  style="margin-top: 1%">
+                                <label id="label_carrera"  for="carrera">Carrera</label>
+                               <input type="text" class="form-control" id="carrera" name="carrera"  value="{{old('carrera')}}">
+                           </div>
+               
  
                         </div>
                         <br>
@@ -148,6 +154,8 @@
       document.getElementById("otro_cargo").style.display = "none";
       document.getElementById("label_cargo").style.display = "none";
       document.getElementById('otro_cargo').name = 'no_seleccionado_input';
+      document.getElementById("label_carrera").style.display = "inline-block";
+      document.getElementById('carrera').style.display = "inline-block";
       document.getElementById('cargo').name = 'cargo';
       break;
       
@@ -155,6 +163,8 @@
       document.getElementById("otro_cargo").style.display = "none";
       document.getElementById("label_cargo").style.display = "none";
       document.getElementById('otro_cargo').name= 'no_seleccionado_input';
+      document.getElementById("label_carrera").style.display = "none";
+      document.getElementById('carrera').style.display = "none";
       document.getElementById('cargo').name = 'cargo';
       break;
 
@@ -162,6 +172,8 @@
       document.getElementById("otro_cargo").style.display = "none";
       document.getElementById("label_cargo").style.display = "none";
       document.getElementById('otro_cargo').name = 'no_seleccionado_input';
+      document.getElementById("label_carrera").style.display = "none";
+      document.getElementById('carrera').style.display = "none";
       document.getElementById('cargo').name = 'cargo';
       break;
 
@@ -169,6 +181,8 @@
       document.getElementById("otro_cargo").style.display = "inline-block";
       document.getElementById("label_cargo").style.display = "inline-block";
       document.getElementById('cargo').name = 'no_seleccionado_select';
+      document.getElementById("label_carrera").style.display = "none";
+      document.getElementById('carrera').style.display = "none";
       document.getElementById('otro_cargo').name = 'cargo';
       break;
   }

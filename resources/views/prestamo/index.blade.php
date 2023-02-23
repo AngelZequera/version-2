@@ -22,11 +22,14 @@
             <h2>Pr&eacute;stamos / Traslados de Equipos</h2>
             <br>
             <p align="right">
-                {{-- <a href="{{ route('prestamos.create') }}" class="btn btn-success">Capturar Pr stamo</a> --}}
-                <a href="{{ route('home') }}" class="btn btn-primary">
-                    < Regresar</a>
-                    <a href="{{ route('fechas_prestamos') }}" class="btn btn-info">
+              
+                <a href="{{ route('fechas_prestamos') }}" class="btn btn-info">
                        Préstamos Vencidos</a>
+                <a style="color: white" type="button" class="btn btn-success" data-toggle="modal" data-target="#exampleModalCenter">
+                Reportes</a>
+
+                <p><a href="{{ route('imprimirPasosDevolucion')}}" class="btn btn-info">Pasos para devolución de equipo</a></p>
+
             </p>
             <table id="example" class="table table-striped table-bordered" style="width:100%">
                 <thead>
@@ -44,6 +47,7 @@
                     </tr>
                 </thead>
                 <tbody>
+                    
 
                 </tbody>
 
@@ -166,7 +170,7 @@
             //"columnDefs": [{ type: 'portugues', targets: "_all" }],            
         </script>
     @else
-        Acceso No v lido
+        Acceso No valido
     @endif
 
 
@@ -182,13 +186,7 @@
                 </div>
                 <div class="col-xs-12 col-sm-12 col-md-12">
                     <div class="form-group">
-                        {{--          <form action="" class="row" id="form-busqueda">
-                        @csrf
-                        <div class="col-sm-12">
-                            <input class="form-control" type="text" id="buscador" name="buscador">
-                        </div>
 
-                    </form> --}}
                         <div class="row">
                             <div class="col-sm-12">
                                 <div class="row">
@@ -209,6 +207,45 @@
                             </div>
                         </div>
 
+                        <div class="col-xs-12 col-sm-12 col-md-12">
+                            <button type="button" class="btn grey btn btn-success" data-bs-dismiss="modal">Cerrar</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <div class="modal fade" id="exampleModal_Alumno" tabindex="-1" aria-labelledby="exampleModal_Alumno"  aria-hidden="true">
+        <div class="modal-dialog modal-lg" role="document">
+            <div class="modal-content" >
+                <div class="modal-header">
+                    <h5 class="modal-title">Reporte Alumno</h5>
+                    <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="col-xs-12 col-sm-12 col-md-12">
+                    <div class="form-group">
+
+                        <table id="reporteAlumno" class="table table-striped table-bordered" >
+                            <thead>
+                                <tr>
+                                    <th>Folio</th>
+                                    <th>Solicitante</th>
+                                    <th>Carrera</th>
+                                    <th>&Aacuterea</th>
+                                    <th>Contacto</th>
+                                    <th>Fecha</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                
+                            </tbody>
+                        
+                        </table>
+
 
 
 
@@ -221,13 +258,39 @@
         </div>
     </div>
 
+<!-- Button trigger modal -->
+
+  
+  <!-- Modal -->
+  <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLongTitle">Reportes</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+            <center>            
+                <a style="color: white; margin-right: 20px"  href="{{ route('ReporteAlumno') }}"  class="btn btn-success">
+                Reporte Alumno</a>
+
+                <a  href="{{ route('ReporteAdministracion') }}" style="color: white"  class="btn btn-info">
+                    Reporte Administrativo</a>
+                </center>
+
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
 
     <script>
-        //params.forEach(modal);
-
         function logKey(params) {
-
-          
             $.ajaxSetup({
                 headers: {
                     'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
