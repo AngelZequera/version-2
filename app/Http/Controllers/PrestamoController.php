@@ -70,7 +70,7 @@ class PrestamoController extends Controller
         $consultaAlumnos =  VsPrestamo::where('activo','=',1)
         ->where('estado','En préstamo')->where('cargo','Administrativo')->get();
         $reporte = $this->reporte($consultaAlumnos);
-        $cargo = "Administrativo";
+        $cargo = "Administración";
         return view('prestamo.reportes', compact('reporte','cargo'));
     }
 
