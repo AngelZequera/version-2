@@ -33,7 +33,7 @@
     
       
 
-        <h1 class="h3 mb-2 text-gray-800">REPORTE</h1>
+        <h1 class="h3 mb-2 text-gray-800">Reporte de préstamo {{$cargo}}</h1>
     
               <div class="container-fluid">
 

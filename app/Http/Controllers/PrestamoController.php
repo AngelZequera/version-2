@@ -47,6 +47,7 @@ class PrestamoController extends Controller
 
     public function reporte($consulta){ 
         $prestamos = [];
+        $cargo =[];
         foreach ($consulta as $key => $value){
         $prestamos[$key] = array(
             $value['id'],
@@ -58,7 +59,9 @@ class PrestamoController extends Controller
             $value['observaciones']
         );
 
+
         }   
+
         return $prestamos ;
      }
 
@@ -67,14 +70,16 @@ class PrestamoController extends Controller
         $consultaAlumnos =  VsPrestamo::where('activo','=',1)
         ->where('estado','En préstamo')->where('cargo','Administrativo')->get();
         $reporte = $this->reporte($consultaAlumnos);
-        return view('prestamo.reportes', compact('reporte'));
+        $cargo = "Administrativo";
+        return view('prestamo.reportes', compact('reporte','cargo'));
     }
 
     public function ReporteAlumno(){
         $consultaAlumnos =  VsPrestamo::where('activo','=',1)
         ->where('estado','En préstamo')->where('cargo','Alumno')->get();
         $reporte = $this->reporte($consultaAlumnos);
-        return view('prestamo.reportes', compact('reporte'));
+        $cargo = "Alumno";
+        return view('prestamo.reportes', compact('reporte','cargo'));
     }
 
 //-------------------------------------
