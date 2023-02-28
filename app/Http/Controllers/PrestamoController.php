@@ -28,18 +28,19 @@ class PrestamoController extends Controller
     public function index()
     {
 
-        $vsprestamos = VsPrestamo::where('activo','=',1)
+                $vsprestamos = VsPrestamo::where('activo','=',1)
             ->where('estado','En préstamo')->get();
+          $prestamos = $this->cargarDT($vsprestamos);
 
         $consultaAlumnos = VsPrestamo::where('activo','=',1)
         ->where('estado','En préstamo')->where('cargo','Alumno')->get();
 
         $consultaAdministracion = VsPrestamo::where('activo','=',1)
         ->where('estado','En préstamo')->where('cargo','Administrativo')->get();
+       
+       
 
-          $prestamos = $this->cargarDT($vsprestamos);
-
-        //dd($prestamos);
+       // dd($prestamos);
         return view('prestamo.index')->with('prestamos',$prestamos);
     
     }
@@ -613,11 +614,6 @@ class PrestamoController extends Controller
            $consulta = PrestamoEquipo::where('id_prestamo','=', $id_prestamo)->get();
            $movEquipos="";
                 foreach ($consulta as $resultado) {
-                      
-/* 
-                    $ultimaArea = MovimientoEquipo::where('id_equipo','=',$id_Equipo)->whereIn('registro',['Cambio de ubicación', 'Registro Inicial en la Base de Datos', 'Traslado', 'Asignación Equipo', 'Alta de equipo', 'Asignación'])->orderBy('id', 'desc')->limit(1)->first();
-                    
-                    $area = $ultimaArea->id_area; */
 
                     $id_Equipo = $resultado->id_equipo;
  
@@ -874,6 +870,7 @@ class PrestamoController extends Controller
         if($consultaLista->lista_equipos == null){
             $prestamo2 = Prestamo::where('id','=', $prestamo_id )->first();
             $prestamo2->activo = 0;
+            $prestamo2->estado = 'Devuelto';
             $prestamo2->update();   
          }
         

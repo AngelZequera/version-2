@@ -348,7 +348,10 @@ public function busquedaEquiposPrestamo(Request $request){
                                // dd($consult, $consult->registro);
                                 if($consult->registro == 'En préstamo'){
                                     $consulta = VsPrestamo::where('estado','=','En préstamo')->where('lista_equipos','LIKE',' Id SIGE: %'.$id_equipo.'%')->orderBy('id', 'desc')->limit(1)->first();
-                                    $equipo->prestamo = $consulta; 
+                                
+                                    if($consulta->activo == 1){
+                                        $equipo->prestamo = $consulta; 
+                                    }
                                     }
                             }
                         }
